@@ -29,11 +29,10 @@ plt.show()
 t = np.arange(0,120*60, 60)
 temp = 36.0 + np.random.uniform(-0.5, 0.5, 120)
 
-df = pd.DataFrame({"Time (s)": t,
-    "Temperature (°C)": temp})
+df = pd.DataFrame({"Time (s)": t, "Temperature (°C)": temp})
 
 # Save to CSV
-df.to_csv("sensor_readings.csv", index=False)
+df.to_csv("sensor_readings.csv", index = False)
 
 # Read the CSV file
 df_read = pd.read_csv("sensor_readings.csv")
@@ -49,15 +48,33 @@ plt.ylabel("Temperature (°C)")
 plt.show()
 
 #Part 6
-t = np.arange(0,120*60, 60)
-temp = 36.0 + np.random.uniform(-0.5, 0.5, 120)
+#6.4.2
+df = pd.read_csv("env_temp_humidity_clean.csv")
+print("First 5 rows:")
+print(df.head())
 
-dataf.to_csv("env_temp_humidity_clean.csv")
-dataf_read = pd.read_csv("env_temp_humidity_clean.csv")
+print("\nData types:")
+print(df.columns)
 
-plt.plot()
-plt.xlabel("Time (s)")
+print("\nData types:")
+print(df.dtypes)
+
+#6.4.3
+print("\nMissing values per column:")
+print(df.isnull().sum())
+
+print("\nMin / Max values:")
+print(df[["temperature_C", "humidity_pct"]].agg(["min", "max"]))
+
+plt.figure()
+plt.plot(df["timestamp"],df["temperature_C"])
+plt.xlabel("Time")
 plt.ylabel("Temperature (°C)")
 plt.show()
 
+plt.figure()
+plt.plot(df["timestamp"],df["humidity_pct"])
+plt.xlabel("Time")
+plt.ylabel("Humidity")
+plt.show()
 
