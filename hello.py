@@ -29,13 +29,20 @@ plt.show()
 t = np.arange(0,120*60, 60)
 temp = 36.0 + np.random.uniform(-0.5, 0.5, 120)
 
-dataf = pd.DataFrame({"Time (s)": t, "Temperature (°C)": temp})
+df = pd.DataFrame({"Time (s)": t,
+    "Temperature (°C)": temp})
 
-dataf.to_csv("env_temp_humidity_clean.csv")
-dataf_read = pd.read_csv("env_temp_humidity_clean.csv")
-subset = dataf_read.iloc[41:81]
+# Save to CSV
+df.to_csv("sensor_readings.csv", index=False)
 
+# Read the CSV file
+df_read = pd.read_csv("sensor_readings.csv")
 
+# Extract values between indices 41 and 80
+subset = df_read.iloc[41:81]
+
+# Plot extracted data
+plt.figure()
 plt.plot(subset["Time (s)"], subset["Temperature (°C)"])
 plt.xlabel("Time (s)")
 plt.ylabel("Temperature (°C)")
@@ -45,13 +52,10 @@ plt.show()
 t = np.arange(0,120*60, 60)
 temp = 36.0 + np.random.uniform(-0.5, 0.5, 120)
 
-dataf = pd.DataFrame({"Time (s)": t, "Temperature (°C)": temp})
-
 dataf.to_csv("env_temp_humidity_clean.csv")
 dataf_read = pd.read_csv("env_temp_humidity_clean.csv")
 
-
-plt.plot(subset["Time (s)"], subset["Temperature (°C)"])
+plt.plot()
 plt.xlabel("Time (s)")
 plt.ylabel("Temperature (°C)")
 plt.show()
